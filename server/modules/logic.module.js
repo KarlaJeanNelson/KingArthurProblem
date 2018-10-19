@@ -1,46 +1,58 @@
-// let numKnights = 15;
-const knightArray = [];
+let knightArray = [];
 let arrayWithZeros = [];
 let newArray = [];
 let bool = false;
 
-const createArray = (numKnights) => {
-	for (let i = 1; i <= numKnights; i++) {
-		knightArray.push(i);
-		// console.log(knightArray);
+const iterateToMax = (max) => {
+	for (let j = 1; j <= max; j++) {
+		bool = false;
+		knightArray = [];
+		createArray(j);
 	}
-	console.log(`knightArray`, knightArray, bool);
-	return iterateOverArray(knightArray);
+	return;
+}
+
+const createArray = (numKnights) => {
+	// console.log('knights', numKnights);
+	for (let i = 1; i <= numKnights; i++) {
+		// console.log(`i`, i);
+		knightArray.push(i);
+	}
+	// console.log(`knightArray`, knightArray, bool);
+	let winner = iterateOverArray(knightArray);
+	console.log(`knights:`, numKnights, `winner:`, winner);
+	return winner;
 }
 
 const iterateOverArray = (array) => {
 	arrayWithZeros = array;
 	if (arrayWithZeros.length > 1) {
-		for (let i in arrayWithZeros) {
-			// console.log(i);
+		for (let k in arrayWithZeros) {
+			// console.log(`i`, i, `bool`, bool);
 			if (bool) {
-				arrayWithZeros.splice(i, 1, 0)
+				arrayWithZeros.splice(k, 1, 0)
 			}
 			bool = !bool
-			console.log(arrayWithZeros[i], bool);
+			// console.log(arrayWithZeros[i], bool);
 		}
 	}	
 	// bool = !bool
-	console.log('iterateOverArray', arrayWithZeros, bool);
+	// console.log('iterateOverArray', arrayWithZeros, bool);
 	return removeZeros(arrayWithZeros);
 }
 
 const removeZeros = (array) => {
 	newArray = array
-	for (let i in newArray) {
-		if (newArray[i] === 0) {
-			newArray.splice(i, 1)
+	for (let idx in newArray) {
+		if (newArray[idx] === 0) {
+			newArray.splice(idx, 1)
 		}
 	}
-	console.log(`newArray`, newArray, bool);
+	// console.log(`newArray`, newArray, bool);
 	return newArray.length > 1 ? iterateOverArray(newArray) : newArray;
 }
 
-console.log('createArray', createArray(90));
+console.log(`iterateToMax`, iterateToMax(99));
+// console.log('winner', createArray(2));
 // console.log('iterateOverArray', iterateOverArray(knightArray), bool);
 // console.log('removeZeros', removeZeros(arrayWithZeros), bool);
